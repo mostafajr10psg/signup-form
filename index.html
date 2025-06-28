@@ -27,14 +27,31 @@
           <p><span>Try it free 7 days</span> then $20/mo. thereafter</p>
         </div>
         <form>
-          <div class="input-fields">
+          <div>
             <input type="text" name="f-name" placeholder="First Name" />
-            <input type="text" name="l-name" placeholder="Last Name" />
-            <input type="email" name="mail" placeholder="Email Address" />
-            <input type="password" name="password" placeholder="Password" />
-            <input type="submit" value="Claim your free trial" />
+            <img src="imgs/icon-error.svg" alt="" class="error icon hidden" />
+            <p class="error desc hidden">First Name cannot be empty</p>
           </div>
-          <p>
+          <div>
+            <input type="text" name="l-name" placeholder="Last Name" />
+            <img src="imgs/icon-error.svg" alt="" class="error icon hidden" />
+            <p class="error desc hidden">Last Name cannot be empty</p>
+          </div>
+          <div>
+            <input type="email" name="mail" placeholder="Email Address" />
+            <img src="imgs/icon-error.svg" alt="" class="error icon hidden" />
+            <p class="error desc hidden">Email cannot be empty</p>
+          </div>
+          <div>
+            <input type="password" name="password" placeholder="Password" />
+            <img src="imgs/icon-error.svg" alt="" class="error icon hidden" />
+            <p class="error desc hidden">Password cannot be empty</p>
+            <p class="password-terms hidden">
+              Create a password at least 6 characters long.
+            </p>
+          </div>
+          <input type="submit" value="Claim your free trial" />
+          <p class="terms">
             By clicking the button, you are agreeing to our
             <span>Terms and Services</span>
           </p>
