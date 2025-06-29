@@ -1,11 +1,10 @@
 let fName = document.querySelector(`input[name="f-name"]`);
 let lName = document.querySelector(`input[name="l-name"]`);
 let mail = document.querySelector(`input[name="mail"]`);
+let mailMsg = document.querySelector(`form div .mail-msg`);
 let password = document.querySelector(`input[name="password"]`);
 let passwordTerms = document.querySelector(`form div .password-terms`);
-let submit = document.querySelector(`input[type="submit"]`);
 let allInputsFields = document.querySelectorAll(`input:not([type="submit"])`);
-let iconAndDescErrors = document.querySelectorAll(".error");
 
 function showError(input) {
   input.classList.add("hidden-placeholder");
@@ -22,26 +21,43 @@ function hiddenError(input) {
   }
 }
 
-document.forms[0].onsubmit = (e) => {
-  e.preventDefault();
+let fNameValid = false,
+  lNameValid = false,
+  mailValid = false,
+  passwordValid = false;
 
+document.forms[0].onsubmit = (e) => {
   allInputsFields.forEach((input) => {
     input.value === "" ? showError(input) : hiddenError(input);
-  });
 
-  if (mail.value !== "" && !/\w+@\w+\.\w+/.test(mail.value)) {
-    showError(mail);
-    mail.nextElementSibling.nextElementSibling.textContent =
-      "Looks like this is not an email";
-  }
+    fName.value !== "" ? (fNameValid = true) : "";
+    lName.value !== "" ? (lNameValid = true) : "";
 
-  password.value !== "" && password.value.length < 6
-    ? passwordTerms.classList.remove("hidden")
-    : passwordTerms.classList.add("hidden");
-
-  allInputsFields.forEach((input) => {
     input.onblur = () => {
-      input.value.length > 0 ? hiddenError(input) : "";
+      input.value !== "" ? hiddenError(input) : "";
     };
   });
+
+  if (/\w+@\w+\.\w+/.test(mail.value)) {
+    mailValid = true;
+  } else if (mail.value !== "" && /\w+@\w+\.\w+/.test(mail.value) === false) {
+    showError(mail);
+    mailMsg.textContent = "Looks like this is not an email";
+  }
+
+  if (password.value.length >= 6) {
+    passwordTerms.classList.add("hidden");
+    passwordValid = true;
+  } else if (password.value !== "" && password.value.length < 6) {
+    passwordTerms.classList.remove("hidden");
+  }
+
+  if (
+    fNameValid === false ||
+    lNameValid === false ||
+    mailValid === false ||
+    passwordValid === false
+  ) {
+    e.preventDefault();
+  }
 };
